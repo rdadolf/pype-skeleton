@@ -13,4 +13,4 @@ class Pipeline(object):
     ast = parser.parse(input, lexer=lexer)
     # Semantic analysis
     ast.walk( CheckSingleAssignment() )
-
+    return ast
