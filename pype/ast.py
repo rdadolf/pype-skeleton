@@ -20,22 +20,17 @@ class ASTNode(object):
       child.parent = self
 
   def pprint(self,indent=''):
-    s = str(indent)+str(self.__class__.__name__)+'\n'
-    for child in self.children:
-      s += child.pprint(indent=indent+'  ')
-    return s
+    '''Recursively prints a formatted string representation of the AST.'''
+    # TODO
 
   def walk(self, visitor):
-    '''Traverses an AST, calling visitor methods on every node.
+    '''Traverses an AST, calling visitor.visit() on every node.
 
     This is a depth-first, pre-order traversal. Parents will be visited before
     any children, children will be visited in order, and (by extension) a node's
     children will all be visited before its siblings.
     The visitor may modify attributes, but may not add or delete nodes.'''
-    # TODO Implement this
-    parent_retval = visitor.visit(self)
-    for child in self.children:
-      child.walk(visitor)
+    # TODO
 
 class ASTProgram(ASTNode):
   def __init__(self, statements):
