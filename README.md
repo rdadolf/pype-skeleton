@@ -4,4 +4,4 @@ The `pype` directory is meant to look very much like that module that you're bei
 
 You should copy the directory to your team's repository, alongside your timeseries module.
 
-We've also included a couple example files for testing purposes.
+We've also included a couple example files for testing purposes, along with a reference dump of their token streams and of their ASTs.
