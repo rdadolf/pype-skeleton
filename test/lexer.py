@@ -102,8 +102,8 @@ abcdefg := 22         #test assign and comment
 >><>                  #test illegal sign
 
                       #test comment to see if this line is working or not
-22
-        
+22 + - * \ = {} ()    #test string, delimeters, and operators
+"teststring"
 '''
 
 
