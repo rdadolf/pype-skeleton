@@ -94,7 +94,7 @@ def t_error(t):
 lexer = ply.lex.lex()
 
 
-
+"""
 data = '''
 3 + 4 * 10
   + -20 *2
@@ -120,4 +120,4 @@ while True:
     if not tok: 
         break      # No more input
     print(tok,'\n')
-
+"""
