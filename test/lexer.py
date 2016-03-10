@@ -53,13 +53,16 @@ def t_NUMBER(t):
 
 
 
-# TODO Ignore whitespace.
+# Ignore whitespace. Note that in ply.lex ignore is a special name
 t_ignore  = ' '
 
 
 
-# TODO Write one rule for IDs and reserved keywords. Section 4.3 has an example.
-t_ID = r'[A-Za-z_][A-Za-z0-9_]*'
+# Write one rule for IDs and reserved keywords. Section 4.3 has an example.
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    t.type = reserved.get(t.value,'ID')    # Check for reserved words
+    return t
 
 
 
