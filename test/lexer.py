@@ -66,8 +66,9 @@ def t_ID(t):
 
 
 
-# TODO Ignore comments. Comments in PyPE are just like in Python. Section 4.5.
+# Ignore comments. Comments in PyPE are just like in Python. Section 4.5.
 t_ignore_COMMENT = r'\#.*'
+
 
 
 # Helper function in finding columns
@@ -80,14 +81,14 @@ def find_column(input,token):
 
 
 
-# TODO Write a rule for newlines that track line numbers. Section 4.6.
+# Write a rule for newlines that track line numbers. Section 4.6.
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
 
 
-# TODO Write an error-handling routine. It should print both line and column numbers.
+# Write an error-handling routine. It should print both line and column numbers.
 def t_error(t):
     print("Illegal character '%s'" % t.value[0], "Error Line", t.lexer.lineno, "Error Column", find_column(data,t))
     t.lexer.skip(1)
@@ -97,7 +98,7 @@ def t_error(t):
 lexer = ply.lex.lex()
 
 
-
+# Testcases including all the specifications
 data = '''
 3 + 4 * 10
   + -20 *2
