@@ -38,14 +38,31 @@ class ASTProgram(ASTNode):
     self.children = statements
 
 class ASTImport(ASTNode): # TODO
+  def __init__(self, statements):
+    super().__init__()
+    self.children = statements  
+
 class ASTComponent(ASTNode): # TODO
+  def __init__(self, name, expressions):
+    super().__init__()
+    self.name = name
+    self.expressions = expressions
   @property
   def name(self): # TODO return an element of self.children
+    return self.name
   @property
   def expressions(self): # TODO return one or more children
+    return self.expressions
+
+
 class ASTInputExpr(ASTNode): # TODO
+  def __init__(self, statements):
+    pass
 class ASTOutputExpr(ASTNode): # TODO
 class ASTAssignmentExpr(ASTNode): # TODO
+  def __init__(self, binding, value):
+    self.binding = binding
+    self.value = value
   @property
   def binding(self): # TODO
   @property
