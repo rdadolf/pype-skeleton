@@ -17,8 +17,8 @@ class SymbolTableVisitor(ASTVisitor):
 
     # TODO
     # Add symbols for the following types of names:
-    #   inputs/outputs: anything in an input or output expression
-    #     the SymbolType should be input or output, and the ref can be None
+    #   inputs: anything in an input expression
+    #     the SymbolType should be input, and the ref can be None
     #     the scope should be the enclosing component
     #   assigned names: the bound name in an assignment expression
     #     the SymbolType should be var, and the ref can be None
