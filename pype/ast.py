@@ -40,7 +40,13 @@ class ASTProgram(ASTNode):
     super().__init__()
     self.children = statements
 
-class ASTImport(ASTNode): # TODO
+class ASTImport(ASTNode):
+  def __init__(self, mod):
+    super().__init__()
+    self.mod = mod
+  @property
+  def module(self):
+    return self.mod
 class ASTComponent(ASTNode): # TODO
   @property
   def name(self): # TODO return an element of self.children
