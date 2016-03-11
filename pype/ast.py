@@ -1,9 +1,10 @@
-from .error import *
 
 class ASTVisitor():
   def visit(self, astnode):
     'A read-only function which looks at a single AST node.'
     pass
+  def return_value(self):
+    return None
 
 class ASTNode(object):
   def __init__(self):
@@ -31,6 +32,8 @@ class ASTNode(object):
     children will all be visited before its siblings.
     The visitor may modify attributes, but may not add or delete nodes.'''
     # TODO
+
+    return visitor.return_value()
 
 class ASTProgram(ASTNode):
   def __init__(self, statements):
