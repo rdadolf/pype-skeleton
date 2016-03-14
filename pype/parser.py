@@ -25,12 +25,10 @@ def p_statement_list(p):
 
 def p_import_statement(p):
   r'import_statement : LPAREN IMPORT ID RPAREN'
-  print ("import",p[3])
   p[0] = ASTImport(p[3])
 
 def p_component(p):
   r'''component : LBRACE ID expression_list RBRACE'''
-  print ("Component", p[2], p[3])
   p[0] = ASTComponent(p[2], p[3])
 
 def p_expression_list(p):
@@ -47,7 +45,6 @@ def p_expression_input(p):
   r'''expression : LPAREN INPUT declaration_list RPAREN
                  | LPAREN INPUT RPAREN'''
   if len(p)>3:
-    print ("input ",p[3])
     p[0] = ASTInputExpr(p[3])
   else :
     p[0] = ASTInputExpr([])
@@ -65,7 +62,6 @@ def p_declaration_list(p):
                        | declaration'''
 
   if len(p)>2:
-    print ("Declaration list",p[0],p[1],p[2])
     p[0] = p[1].append(p[2])
     p[0] = p[1]
   else:
@@ -86,7 +82,6 @@ def p_type(p):
 
 def p_expression_assign(p):
   r'''expression : LPAREN ASSIGN ID expression RPAREN'''
-  print (":=",p[3],p[4])
   p[0] = ASTAssignmentExpr(p[3], p[4])
 
 def p_expression_parameter_list(p):
@@ -94,7 +89,6 @@ def p_expression_parameter_list(p):
                  | LPAREN ID RPAREN'''
   #TODO
   if len(p)>4:
-    print ("Eval expr",p[2],p[3])
     p[0] = ASTEvalExpr(p[2],p[3])
   else:
     p[0] = ASTEvalExpr(p[2], [])
@@ -130,7 +124,6 @@ def p_expression_str(p):
 def p_parameter_list(p):
   r'''parameter_list : parameter_list expression
                      | expression'''
-  print ("param list:",len(p),p[0],p[1])
   if len(p)>2:
     p[0] = p[1].append(p[2])
     p[0] = p[1]
