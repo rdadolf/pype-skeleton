@@ -82,7 +82,6 @@ class ASTOutputExpr(ASTNode):
 class ASTAssignmentExpr(ASTNode): 
   def __init__(self, binding, value):
     super().__init__()
-    #value.insert(0,ASTID(binding))
     self.children=[ASTID(binding),value]
   @property
   def binding(self):

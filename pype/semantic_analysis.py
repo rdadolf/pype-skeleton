@@ -1,4 +1,4 @@
-from ast import *
+from .ast import *
 
 class PrettyPrint(ASTVisitor):
   def __init__(self):
@@ -23,6 +23,4 @@ class CheckSingleAssignment(ASTVisitor):
       else:
         self.assignment_table.append(name)
     else:      
-      pass        
-    
-
+      pass
