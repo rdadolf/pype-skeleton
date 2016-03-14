@@ -1,4 +1,4 @@
-from .ast import *
+from ast import *
 
 class PrettyPrint(ASTVisitor):
   def __init__(self):
@@ -8,6 +8,20 @@ class PrettyPrint(ASTVisitor):
 
 class CheckSingleAssignment(ASTVisitor):
   def __init__(self):
-    pass # TODO
+    self.assignment_table=[]
+  
   def visit(self, node):
-    pass # TODO
+    if isinstance(node, ASTProgram):
+      for child in node.children:
+        self.visit(child)
+    elif isinstance(node, ASTComponent):
+      self.assignment_table=[]
+    elif isinstance(node, ASTAssignmentExpr):
+      if node.binding.name in self.assignment_table:
+        raise Exception("Assignment expressions bind to the same name: "+node.binding.name)
+      else:
+        self.assignment_table.append(node.binding.name)
+    else:      
+      pass        
+    
+
