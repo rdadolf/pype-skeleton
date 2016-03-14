@@ -97,7 +97,7 @@ def t_error(t):
 # This actually builds the lexer.
 lexer = ply.lex.lex()
 
-
+"""
 # Testcases including all the specifications
 data = '''
 3 + 4 * 10
@@ -124,4 +124,4 @@ while True:
     if not tok: 
         break      # No more input
     print(tok,'\n')
-
+"""

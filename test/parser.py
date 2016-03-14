@@ -1,7 +1,7 @@
 import ply.yacc
 
-from pype.lexer import tokens,reserved
-from pype.ast import *
+from lexer import tokens,reserved
+from ast import *
 
 # Here's an example production rule which constructs an AST node
 def p_program(p):
@@ -41,25 +41,26 @@ def p_expression_list(p):
     p[0] = [p[1]]
 
 
-def p_expression(p):
+def p_expression_input(p):
   r'''expression : LPAREN INPUT declaration_list RPAREN
                  | LPAREN INPUT RPAREN'''
-  if len(p)>4:
+  if len(p)>3:
     p[0] = ASTInputExpr(p[3])
   else :
-    p[0] = [] # we are not sure ~ check this later plz~
+    p[0] = ASTInputExpr([])
 
-def p_expression(p):
+def p_expression_output(p):
   r'''expression : LPAREN OUTPUT declaration_list RPAREN
                  | LPAREN OUTPUT RPAREN'''
-  if len(p)>4:
+  if len(p)>3:
       p[0] = ASTOutputExpr(p[3])
-    else :
-      p[0] = [] # we are not sure ~ check this later plz~
+  else :
+      p[0] = ASTOutputExpr([])
 
 def p_declaration_list(p):
   r'''declaration_list : declaration_list declaration
                        | declaration'''
+
   if len(p)>2:
     p[0] = p[1].append(p[2])
     p[0] = p[1]
@@ -69,6 +70,7 @@ def p_declaration_list(p):
 def p_declaration(p):
   r'''declaration : LPAREN type ID RPAREN
                   | ID'''
+  #print ("Declare",len(p),p[0],p[1],p[2],p[3],p[4])
   if len(p)>2:
     p[0] = ASTID(p[3], p[2])
   else :
@@ -76,45 +78,48 @@ def p_declaration(p):
 
 def p_type(p):
   r'''type : ID'''
-  return ASTID(p[1], p[0]) #not sure
+  p[0] = ASTID(p[1]) #not sure
 
-def p_expression(p):
+def p_expression_assign(p):
   r'''expression : LPAREN ASSIGN ID expression RPAREN'''
   p[0] = ASTAssignmentExpr(p[3], p[4])
 
-def p_expression(p):
+def p_expression_parameter_list(p):
   r'''expression : LPAREN ID parameter_list RPAREN
                  | LPAREN ID RPAREN'''
-  # if len(p)>4:
-  #   p[0] = 
+  #TODO
+  if len(p)>4:
+    p[0] = ASTEvalExpr(p[2],p[3])
+  else:
+    p[0] = ASTEvalExpr(p[2], [])
 
-def p_expression(p):
+def p_expression_add(p):
   r'''expression : LPAREN OP_ADD parameter_list RPAREN'''
   p[0] = ASTEvalExpr(p[2], p[3])
 
-def p_expression(p):
+def p_expression_sub(p):
   r'''expression : LPAREN OP_SUB parameter_list RPAREN'''
   p[0] = ASTEvalExpr(p[2], p[3])
 
-def p_expression(p):
+def p_expression_mul(p):
   r'''expression : LPAREN OP_MUL parameter_list RPAREN'''
   p[0] = ASTEvalExpr(p[2], p[3])
 
-def p_expression(p):
+def p_expression_div(p):
   r'''expression : LPAREN OP_DIV parameter_list RPAREN'''
   p[0] = ASTEvalExpr(p[2], p[3])
 
-def p_expression(p):
+def p_expression_id(p):
   r'''expression : ID'''
-  return ASTID(p[1])
+  p[0] = ASTID(p[1])
 
-def p_expression(p):
+def p_expression_num(p):
   r'''expression : NUMBER'''
-  return ASTLiteral(p[1])
+  p[0] = ASTLiteral(p[1])
 
-def p_expression(p):
+def p_expression_str(p):
   r'''expression : STRING'''
-  return ASTLiteral(p[1]) # not sure too....
+  p[0] = ASTLiteral(p[1]) # not sure too....
 
 def p_parameter_list(p):
   r'''parameter_list : parameter_list expression
@@ -138,5 +143,7 @@ def p_error(p):
   # t.lexer.skip(1)
   return 0
 
-# start = 'program'
-# parser = ply.yacc.yacc() # To get more information, add debug=True
+start = 'program'
+parser = ply.yacc.yacc(debug=True) # To get more information, add debug=True
+
+
