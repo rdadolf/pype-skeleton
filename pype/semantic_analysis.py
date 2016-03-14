@@ -17,10 +17,11 @@ class CheckSingleAssignment(ASTVisitor):
     elif isinstance(node, ASTComponent):
       self.assignment_table=[]
     elif isinstance(node, ASTAssignmentExpr):
-      if node.binding.name in self.assignment_table:
-        raise Exception("Assignment expressions bind to the same name: "+node.binding.name)
+      name=node.binding.name
+      if name in self.assignment_table:
+        raise Exception("Assignment expressions bind to the same name: "+name)
       else:
-        self.assignment_table.append(node.binding.name)
+        self.assignment_table.append(name)
     else:      
       pass        
     
