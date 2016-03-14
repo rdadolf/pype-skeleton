@@ -1,9 +1,10 @@
-from .error import *
 
 class ASTVisitor():
   def visit(self, astnode):
     'A read-only function which looks at a single AST node.'
     pass
+  def return_value(self):
+    return None
 
 class ASTNode(object):
   def __init__(self):
@@ -32,6 +33,8 @@ class ASTNode(object):
     The visitor may modify attributes, but may not add or delete nodes.'''
     # TODO
 
+    return visitor.return_value()
+
 class ASTProgram(ASTNode):
   def __init__(self, statements):
     super().__init__()
@@ -41,6 +44,14 @@ class ASTImport(ASTNode): # TODO
   def __init__(self, statements):
     super().__init__()
     self.children = statements  
+
+class ASTImport(ASTNode):
+  def __init__(self, mod):
+    super().__init__()
+    self.mod = mod
+  @property
+  def module(self):
+    return self.mod
 
 class ASTComponent(ASTNode): # TODO
   def __init__(self, name, expressions):
@@ -58,7 +69,9 @@ class ASTComponent(ASTNode): # TODO
 class ASTInputExpr(ASTNode): # TODO
   def __init__(self, statements):
     pass
+
 class ASTOutputExpr(ASTNode): # TODO
+
 class ASTAssignmentExpr(ASTNode): # TODO
   def __init__(self, binding, value):
     self.binding = binding
@@ -67,12 +80,13 @@ class ASTAssignmentExpr(ASTNode): # TODO
   def binding(self): # TODO
   @property
   def value(self): # TODO
+
 class ASTEvalExpr(ASTNode): # TODO
   @property
-  def op(self): # TODO
+  def op(self):
     return self.children[0]
   @property
-  def args(self): # TODO
+  def args(self):
     return self.children[1:]
 
 # These are already complete.

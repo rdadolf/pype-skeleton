@@ -23,17 +23,14 @@ def p_statement_list(p):
 # TODO Implement production rules for all other grammar rules and construct a
 #      full AST.
 
-# TODO
 def p_import_statement(p):
   r'import_statement : LPAREN IMPORT ID RPAREN'
   p[0] = ASTImport(p[3])
 
-# TODO
 def p_component(p):
   r'''component : LBRACE ID expression_list RBRACE'''
   p[0] = ASTComponent(p[2], p[3])
 
-# TODO
 def p_expression_list(p):
   r'''expression_list : expression_list expression
                       | expression'''
@@ -44,7 +41,6 @@ def p_expression_list(p):
     p[0] = [p[1]]
 
 
-# TODO
 def p_expression(p):
   r'''expression : LPAREN INPUT declaration_list RPAREN
                  | LPAREN INPUT RPAREN'''
@@ -53,16 +49,14 @@ def p_expression(p):
   else :
     p[0] = [] # we are not sure ~ check this later plz~
 
-# TODO
 def p_expression(p):
   r'''expression : LPAREN OUTPUT declaration_list RPAREN
                  | LPAREN OUTPUT RPAREN'''
   if len(p)>4:
-      p[0] = ASTInputExpr(p[3])
+      p[0] = ASTOutputExpr(p[3])
     else :
       p[0] = [] # we are not sure ~ check this later plz~
 
-# TODO
 def p_declaration_list(p):
   r'''declaration_list : declaration_list declaration
                        | declaration'''
@@ -72,7 +66,6 @@ def p_declaration_list(p):
   else:
     p[0] = [p[1]]
 
-# TODO
 def p_declaration(p):
   r'''declaration : LPAREN type ID RPAREN
                   | ID'''
@@ -81,59 +74,48 @@ def p_declaration(p):
   else :
     p[0] = ASTID(p[1])
 
-# TODO
 def p_type(p):
   r'''type : ID'''
   return ASTID(p[1], p[0]) #not sure
 
-# TODO
 def p_expression(p):
   r'''expression : LPAREN ASSIGN ID expression RPAREN'''
   p[0] = ASTAssignmentExpr(p[3], p[4])
 
-# TODO
 def p_expression(p):
   r'''expression : LPAREN ID parameter_list RPAREN
                  | LPAREN ID RPAREN'''
   # if len(p)>4:
   #   p[0] = 
 
-# TODO
 def p_expression(p):
   r'''expression : LPAREN OP_ADD parameter_list RPAREN'''
   p[0] = ASTEvalExpr(p[2], p[3])
 
-# TODO
 def p_expression(p):
   r'''expression : LPAREN OP_SUB parameter_list RPAREN'''
   p[0] = ASTEvalExpr(p[2], p[3])
 
-# TODO
 def p_expression(p):
   r'''expression : LPAREN OP_MUL parameter_list RPAREN'''
   p[0] = ASTEvalExpr(p[2], p[3])
 
-# TODO
 def p_expression(p):
   r'''expression : LPAREN OP_DIV parameter_list RPAREN'''
   p[0] = ASTEvalExpr(p[2], p[3])
 
-# TODO
 def p_expression(p):
   r'''expression : ID'''
   return ASTID(p[1])
 
-# TODO
 def p_expression(p):
   r'''expression : NUMBER'''
   return ASTLiteral(p[1])
 
-# TODO
 def p_expression(p):
   r'''expression : STRING'''
   return ASTLiteral(p[1]) # not sure too....
 
-# TODO
 def p_parameter_list(p):
   r'''parameter_list : parameter_list expression
                      | expression'''
