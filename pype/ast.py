@@ -1,4 +1,3 @@
-
 class ASTVisitor():
   def visit(self, astnode):
     'A read-only function which looks at a single AST node.'
@@ -25,10 +24,10 @@ class ASTNode(object):
     if self is not None:
         print (indent+self.__class__.__name__)
         indent+='\t'
-        for child in self.children():
+        for child in self.children:
             if isinstance(child, ASTID):
-                print (indent+self.__class__.__name__)
-            else
+                print (indent+child.__class__.__name__)
+            else:
                 child.pprint(indent)
 
   def walk(self, visitor):
@@ -58,40 +57,48 @@ class ASTImport(ASTNode):
 
 class ASTComponent(ASTNode): 
   def __init__(self, name, expressions):
+    print (name)
     super().__init__()
-    self.name = name
+    expressions.insert(0,ASTID(name))
     self.children=expressions
 
   @property
   def name(self): 
-    return self.name
+    return self.children[0]
   @property
   def expressions(self): 
-    return self.children
+    return self.children[1:]
 
 class ASTInputExpr(ASTNode):
   def __init__(self, declarations):
+    super().__init__()
     self.children=declarations
 
 class ASTOutputExpr(ASTNode): 
   def __init__(self, declarations):
+    super().__init__()
     self.children=declarations
 
 class ASTAssignmentExpr(ASTNode): 
   def __init__(self, binding, value):
-    self.binding = binding
-    self.value = value
-    self.children=[binding, value]
+    super().__init__()
+    #value.insert(0,ASTID(binding))
+    self.children=[ASTID(binding),value]
   @property
   def binding(self):
-      return self.binding
+      return self.children[0]
   @property
   def value(self):
-      return self.value
+      return self.children[1:]
 
 class ASTEvalExpr(ASTNode): 
   def __init__(self, op, args):
-    self.children=args.insert(0,op)
+    super().__init__()
+    if args is not None:
+        args.insert(0,ASTID(op))
+        self.children=args
+    else:
+        self.children=[ASTID(op)]
 
   @property
   def op(self):
@@ -112,3 +119,5 @@ class ASTLiteral(ASTNode):
     super().__init__()
     self.value = value
     self.type = 'Scalar'
+
+
