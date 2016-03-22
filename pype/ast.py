@@ -64,7 +64,7 @@ class ASTComponent(ASTNode):
 
   @property
   def name(self): 
-    return self.children[0]
+    return self.children[0].name
   @property
   def expressions(self): 
     return self.children[1:]

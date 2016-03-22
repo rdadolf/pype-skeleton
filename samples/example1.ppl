@@ -8,6 +8,3 @@
   (input (TimeSeries t))
   (output new_t)
 }
-
-
-
