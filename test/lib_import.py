@@ -48,5 +48,5 @@ class LibraryImporter(object):
            #   add a symbol like before, but with type librarymethod
            #   (the ref should be the method, not obj)
           if inspect.isroutine(method) and is_component(method):
-            symtab.addsym( Symbol(name, SymbolType.librarymethod, method) )
+            symtab.addsym( Symbol(methodname, SymbolType.librarymethod, method) )
     return symtab
