@@ -2,7 +2,7 @@ from lexer import lexer
 from parser import parser
 #from ast import *
 from semantic_analysis import CheckSingleAssignment
-#from .translate import SymbolTableVisitor
+#from translate import SymbolTableVisitor
 
 class Pipeline(object):
   def __init__(self, f):

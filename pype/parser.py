@@ -131,6 +131,14 @@ def p_parameter_list(p):
     p[0] = [p[1]]
 
 
+# Helper function in finding columns
+def find_column(input,token):
+    last_cr = input.rfind('\n',0,p.lexpos(0))
+    if last_cr < 0:
+      last_cr = 0
+    column = (p.lexpos(0) - last_cr)
+    return column
+
 
 # TODO: Write an error handling function. You should attempt to make the error
 #       message sensible. For instance, print out the line and column numbers to
@@ -139,9 +147,8 @@ def p_parameter_list(p):
 #       If you're interested, read section 6.8, but it requires a fairly deep
 #       understanding of LR parsers and the language specification.
 def p_error(p):
-  # print("Illegal character '%s'" % p.value[0], "Error Line", t.lexer.lineno, "Error Column", find_column(data,t))
-  # t.lexer.skip(1)
-  return 0
+    print("Illegal character '%s'" % p.value[0], "Error Line", p.lineno, "Error Column",p.lexpos)
+    return 0
 
 start = 'program'
 parser = ply.yacc.yacc(debug=True) # To get more information, add debug=True
