@@ -147,7 +147,7 @@ def find_column(input,token):
 #       If you're interested, read section 6.8, but it requires a fairly deep
 #       understanding of LR parsers and the language specification.
 def p_error(p):
-    print("Illegal character '%s'" % p.value[0], "Error Line", p.lineno, "Error Column",p.lexpos)
+    print("Illegal character '%s'" % p.value[0], "Error Line", p.lineno, "Error Position",p.lexpos)
     return 0
 
 start = 'program'
