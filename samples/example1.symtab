@@ -7,4 +7,4 @@ standardize
   mu => Symbol(name='mu', type=<SymbolType.var: 2>, ref=None)
   sig => Symbol(name='sig', type=<SymbolType.var: 2>, ref=None)
   t => Symbol(name='t', type=<SymbolType.input: 3>, ref=None)
-  new_t => Symbol(name='new_t', type=<SymbolType.output: 4>, ref=None)
+  new_t => Symbol(name='new_t', type=<SymbolType.var: 2>, ref=None)
