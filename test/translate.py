@@ -41,8 +41,8 @@ class SymbolTableVisitor(ASTVisitor):
       self.symbol_table.addsym(Symbol(node.binding.name, SymbolType.var,None),scope=self.scope)
         
     if isinstance(node, ASTComponent):
-      self.scope=node.name
-      self.symbol_table.addsym(Symbol(self.scope.name, SymbolType.component, None))
+      self.scope=node.name.name
+      self.symbol_table.addsym(Symbol(self.scope, SymbolType.component, None))
    
     # Note, you'll need to track scopes again for some of these.
     # You may need to add class state to handle this.
