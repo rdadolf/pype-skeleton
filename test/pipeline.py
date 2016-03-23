@@ -5,9 +5,9 @@ from semantic_analysis import CheckSingleAssignment
 from translate import SymbolTableVisitor
 
 class Pipeline(object):
-  def __init__(self, f):
-    with open(f) as source:
-      self.compile(source)
+  def __init__(self, source):
+    with open(source) as f:
+      self.compile(f)
 
   def compile(self, file):
     input = file.read()
