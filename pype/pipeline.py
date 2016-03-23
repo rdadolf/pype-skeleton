@@ -6,7 +6,7 @@ from .translate import SymbolTableVisitor
 
 class Pipeline(object):
   def __init__(self, source):
-    with open(f) as source:
+    with open(source) as f:
       self.compile(f)
 
   def compile(self, file):
