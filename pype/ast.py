@@ -1,9 +1,10 @@
-from .error import *
 
 class ASTVisitor():
   def visit(self, astnode):
     'A read-only function which looks at a single AST node.'
     pass
+  def return_value(self):
+    return None
 
 class ASTNode(object):
   def __init__(self):
@@ -32,12 +33,20 @@ class ASTNode(object):
     The visitor may modify attributes, but may not add or delete nodes.'''
     # TODO
 
+    return visitor.return_value()
+
 class ASTProgram(ASTNode):
   def __init__(self, statements):
     super().__init__()
     self.children = statements
 
-class ASTImport(ASTNode): # TODO
+class ASTImport(ASTNode):
+  def __init__(self, mod):
+    super().__init__()
+    self.mod = mod
+  @property
+  def module(self):
+    return self.mod
 class ASTComponent(ASTNode): # TODO
   @property
   def name(self): # TODO return an element of self.children
