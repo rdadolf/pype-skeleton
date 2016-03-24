@@ -1,0 +1,17 @@
+language: python
+python:
+    - "3.5"
+before_install:
+    - pip install pytest pytest-cov
+    - pip install coveralls
+script:
+    - py.test
+after_success:
+    - coveralls
+notifications:
+  email: 
+    - qingzhao@g.harvard.edu
+    - jeewonhwang@g.harvard.edu
+    - zelong430@gmail.com
+    - chenchenzhang@g.harvard.edu
+    - tang01@g.harvard.edu	
