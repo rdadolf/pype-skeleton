@@ -33,10 +33,7 @@ class SymbolTableVisitor(ASTVisitor):
 
     if isinstance(node, ASTInputExpr):
       self.symbol_table.addsym(Symbol(node.children[0].name, SymbolType.input, None),scope=self.scope)
-
-    if isinstance(node, ASTOutputExpr):
-      self.symbol_table.addsym(Symbol(node.children[0].name, SymbolType.output, None),scope=self.scope)
-
+    
     if isinstance(node, ASTAssignmentExpr):
       self.symbol_table.addsym(Symbol(node.binding, SymbolType.var,None),scope=self.scope)
         
