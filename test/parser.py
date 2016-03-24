@@ -1,7 +1,7 @@
 import ply.yacc
 
-from .lexer import tokens,reserved
-from .ast import *
+from lexer import tokens,reserved
+from ast import *
 
 # Here's an example production rule which constructs an AST node
 def p_program(p):
@@ -130,16 +130,6 @@ def p_parameter_list(p):
   else:
     p[0] = [p[1]]
 
-
-# Helper function in finding columns
-def find_column(input,token):
-    last_cr = input.rfind('\n',0,p.lexpos(0))
-    if last_cr < 0:
-      last_cr = 0
-    column = (p.lexpos(0) - last_cr)
-    return column
-
-
 # TODO: Write an error handling function. You should attempt to make the error
 #       message sensible. For instance, print out the line and column numbers to
 #       help find your error.
@@ -152,4 +142,5 @@ def p_error(p):
 
 start = 'program'
 parser = ply.yacc.yacc(debug=True) # To get more information, add debug=True
+
 

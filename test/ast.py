@@ -119,4 +119,3 @@ class ASTLiteral(ASTNode):
     self.value = value
     self.type = 'Scalar'
 
-

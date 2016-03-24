@@ -2,7 +2,7 @@ import importlib
 import inspect
 import functools
 
-from .symtab import *
+from symtab import *
 
 ATTRIB_COMPONENT = '_pype_component'
 

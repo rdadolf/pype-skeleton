@@ -1,6 +1,6 @@
-from .ast import *
-from .symtab import *
-from .lib_import import LibraryImporter
+from ast import *
+from symtab import *
+from lib_import import LibraryImporter
 
 class SymbolTableVisitor(ASTVisitor):
   def __init__(self):
@@ -33,13 +33,13 @@ class SymbolTableVisitor(ASTVisitor):
 
     if isinstance(node, ASTInputExpr):
       self.symbol_table.addsym(Symbol(node.children[0].name, SymbolType.input, None),scope=self.scope)
-    
+
     if isinstance(node, ASTAssignmentExpr):
-      self.symbol_table.addsym(Symbol(node.binding, SymbolType.var,None),scope=self.scope)
+      self.symbol_table.addsym(Symbol(node.binding.name, SymbolType.var,None),scope=self.scope)
         
     if isinstance(node, ASTComponent):
       self.scope=node.name.name
-      self.symbol_table.addsym(Symbol(self.scope.name, SymbolType.component, None))
+      self.symbol_table.addsym(Symbol(self.scope, SymbolType.component, None))
    
     # Note, you'll need to track scopes again for some of these.
     # You may need to add class state to handle this.

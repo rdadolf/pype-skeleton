@@ -33,4 +33,3 @@ class SymbolTable(object):
       self[scope][sym.name]=sym
     else:
       self.T[scope]={sym.name:sym}
-
