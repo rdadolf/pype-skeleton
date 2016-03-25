@@ -126,6 +126,7 @@ class LoweringVisitor(ASTModVisitor):
           if var_nodeid is None: # Use before declaration
             # The "unknown" type will be replaced later
             var_nodeid = fg.new_node(FGNodeType.unknown).nodeid
+            fg.set_var(varname, var_nodeid)
           # Already declared in an assignment or input expression
           n.inputs.append(var_nodeid)
       return n
