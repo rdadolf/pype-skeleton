@@ -1,7 +1,7 @@
 import collections
 import enum
 
-SymbolType = enum.Enum('SymbolType', 'component var input output libraryfunction librarymethod')
+SymbolType = enum.Enum('SymbolType', 'component var input libraryfunction librarymethod')
 Symbol = collections.namedtuple('Symbol','name type ref')
 
 class SymbolTable(object):
@@ -30,3 +30,12 @@ class SymbolTable(object):
 
   def addsym(self, sym, scope='global'):
     # TODO
+
+  def lookupsym(self, sym, scope=None):
+    if scope is not None:
+      if sym in self.T[scope]:
+        return self.T[scope][sym]
+    if sym in self.T['global']:
+      return self.T['global'][sym]
+    return None
+
