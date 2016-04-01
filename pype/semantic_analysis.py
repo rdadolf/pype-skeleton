@@ -13,7 +13,7 @@ class CheckSingleAssignment(ASTVisitor):
   def visit(self, node):
     pass # TODO
 
-ass CheckSingleIOExpression(ASTVisitor):
+class CheckSingleIOExpression(ASTVisitor):
   def __init__(self):
     self.component = None
     self.component_has_input = False
