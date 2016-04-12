@@ -50,7 +50,7 @@ class PCodeOp(object):
   async def literal(out_qs, value_ref):
     def f(*inputs):
       return value_ref
-    await PCodeOp._node(in_qs, out_qs, f)
+    await PCodeOp._node([], out_qs, f)
 
 
 class PCode(object):
